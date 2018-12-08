@@ -1,0 +1,5 @@
+# SocketProcess
+NDK实现利用Socket实现Linux层双进程守护
+利用socket的这种方式和思路能很好解决，使用轮询所带来的资源消耗问题，在service中先调用createWatcher(String id)先建立服务端，
+然后connectMonitor()跟服务端建立连接，一旦service被杀死connectMonitor()得不到执行就会跟服务端失去连接，这个时候child_listen_msg()
+里的select就不会阻塞，进而就会执行execlp重新启用service
